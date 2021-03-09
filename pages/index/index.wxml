@@ -1,0 +1,10 @@
+<view class="index_page">
+  <view class="search_box">
+    <text class="title">东风渐绿西湖柳,雁已归，人未南归。</text>
+    <input id="inputSearch" bindinput="inputChange"  class="search" type="text"  placeholder="请输入古诗标题/作者等" placeholder-style="color: #fff;"/>
+  </view>
+  <view class="text_box">
+    {{value}}
+  </view>
+</view>
+
