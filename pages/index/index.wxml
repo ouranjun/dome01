@@ -1,10 +1,15 @@
-<view class="index_page">
+<view class="">
+  <text class="top_title">东风渐绿西湖柳,雁已归，人未南归。</text>
   <view class="search_box">
-    <text class="title">东风渐绿西湖柳,雁已归，人未南归。</text>
-    <input id="inputSearch" bindinput="inputChange"  class="search" type="text"  placeholder="请输入古诗标题/作者等" placeholder-style="color: #fff;"/>
+    <input id="inputSearch" bindinput="inputChange"  class="search" type="text"  placeholder="请输入诗词名称/作者等" placeholder-style="color: #fff;"/>
+    <text class="search_btn" bindtap="bindSearch">搜索</text>
   </view>
-  <view class="text_box">
-    {{value}}
+  <view class="text_box" wx:if="{{newslists.length}}">
+    <view bindtap="gotoDetail" data-title="{{item.title}}" wx:for="{{newslists}}" wx:key="index" class="text_list">
+      <text class="title">{{item.title}}</text>
+      <text class="author">{{item.author}}</text>
+    </view>
   </view>
+  <view wx:else class="err">{{err}}</view>
 </view>
 

@@ -1,0 +1,41 @@
+/* pages/detail/index.wxss */
+.detail_page {
+  background-color: #f6f6f6;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  padding: 0 30rpx;
+  overflow-y: scroll;
+  font-family: 'Courier New', Courier, monospace;
+}
+.detail_title{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: 30rpx 0;
+}
+.detail_title .title {
+  font-size: 50rpx;
+}
+.detail_title .author {
+  font-size: 30rpx;
+  color: rgba(0,0,0,0.2);
+}
+.detail_content {
+  margin-bottom: 30rpx;
+  font-size: 35rpx;
+  line-height: 50rpx;
+  text-align: center;
+}
+.detail_intro {
+  margin: 0 auto;
+  width: 95%;
+  font-size: 30rpx;
+  line-height: 35rpx;
+  color: #333;
+  margin-bottom: 30rpx;
+  text-align: justify;
+}

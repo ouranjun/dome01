@@ -1,37 +1,44 @@
-// pages/index/index.js
+// pages/detail/index.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    value: '', // 输入框内容
-    err: '输入诗人"李白"试试', // 搜索错误返回值
-    newslists: [] // 请求的诗集数据
+    title: '', // 索引值
+    content: [],
+    newslist: {}, // 诗词数据
+    intro: [] // 注释
   },
 
   /**
-   * 输入框发生变化时
+   * 生命周期函数--监听页面加载
    */
-  inputChange: function (e) {
-    let value = e.detail.value;
+  onLoad: function (options) {
+    console.log(options.title);
     this.setData({
-      value: e.detail.value
+      title: options.title
     })
   },
-  /**
-   * 
-   * 点击搜索按钮
-   */
-  bindSearch: function () {
-    var _that = this;
 
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    var _that = this
     wx.request({
       url: 'https://api.tianapi.com/txapi/poetry/index?key=70bdadb0bfc340d7c7a106e4cb8e8c41',
       data: {
-        num: 10,
+        num: 1,
         page: 1,
-        word: this.data.value
+        word: this.data.title
       },
       success (res) {
         wx.showLoading({
@@ -40,7 +47,17 @@ Page({
         })
         if (res.data.code == 200) {
           _that.setData({
-            newslists: res.data.newslist
+            newslist: res.data.newslist[0],
+            content: res.data.newslist[0].content.split('。'),
+            intro: res.data.newslist[0].intro
+          })
+          var intro = _that.data.newslist.intro
+          var yunyiIndex = _that.data.newslist.intro.search(/【韵译】/)
+          var pinxiIndex = _that.data.newslist.intro.search(/【评析】/)
+          let intorlist = []
+          intorlist.push(intro.substring(0,yunyiIndex), intro.substring(yunyiIndex,pinxiIndex), intro.substring(pinxiIndex))
+          _that.setData({
+            intro: intorlist
           })
         } else {
           _that.setData({
@@ -53,36 +70,6 @@ Page({
       }
     })
   },
-  /**
-   * 
-   * 点击进入详情页
-   */
-  gotoDetail (e) {
-    var title = e.currentTarget.dataset.title
-    wx.navigateTo({
-      url: '../detail/index?title='+ title,
-
-    })
-  },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
   /**
    * 生命周期函数--监听页面隐藏
    */

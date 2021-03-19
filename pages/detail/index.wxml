@@ -1,0 +1,18 @@
+<!--pages/detail/index.wxml-->
+<view class="detail_page">
+  <block wx:if="newslist">
+    <view class="detail_title" >
+      <view class="title">{{newslist.title}}</view>
+      <text class="author">{{newslist.author}}</text>
+    </view>
+    <view class="detail_content" wx:for="{{content}}" wx:key="index">
+      <text>{{item}}</text>
+    </view>
+    <view class="detail_intro"  wx:for="{{intro}}" wx:key="index">
+      <view>{{item}}</view>
+    </view>
+  </block>
+  <view wx:else>
+    暂无相关内容
+  </view>
+</view>
